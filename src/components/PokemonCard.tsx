@@ -1,33 +1,16 @@
 "use client";
 
 import Image from 'next/image';
+import PokemonDetailModal from './PokemonDetailModal';
+import { Pokemon } from "@/types/pokemon";
+import { useState } from 'react';
 
-interface PokemonCardProps {
-  id: number;
-  name: string;
-  sprites: {
-    front_default: string;
-  };
-  types: {
-    type: {
-      name: string;
-    };
-  }[];
-  height: number;
-  weight: number;
-  stats: {
-    base_stat: number;
-    stat: {
-      name: string;
-    };
-  }[];
-}
+function PokemonCard({ id, name, sprites, types, height, weight, stats }: Pokemon) {
 
-function PokemonCard({ id, name, sprites, type, height, weight, basicStatistics }: PokemonCardProps) {
+  const [showPokemonDetailModal, setShowPokemonDetailModal] = useState(false);
 
-  // console.log(sprites.front_default, 'images')
   return (
-    <div className='flex flex-row w-full cursor-pointer'>
+    <div className='flex flex-row w-full cursor-pointer' onClick={() => setShowPokemonDetailModal(true)}>
       <div className='h-full relative'>
         <div className=''>
           <Image
@@ -46,41 +29,25 @@ function PokemonCard({ id, name, sprites, type, height, weight, basicStatistics 
               {name}
             </h3>
           </div>
-          {/* <div className='bg-[#E7F3D8] py-1.5 px-2 rounded-4xl flex flex-rows justify-center items-center gap-1'>
-            <div>
-              <Image
-                src="/icons/ic_tick-circle.svg"
-                alt="ic_tick-circle"
-                width={16}
-                height={16}
-              />
-            </div>
-            <div>
-              <p className='text-[#354E18] font-medium text-sm'>
-                {state}
-              </p>
-            </div>
-          </div> */}
         </div>
         <div>
           <p className='text-[#575B52] font-medium text-sm'>
             {id}
           </p>
         </div>
-        {/* <div>
-          <CharacterDetailModal
-            image={image}
+        <div>
+          <PokemonDetailModal
+            id={id}
             name={name}
-            species={species}
-            gender={gender}
-            origin={origin.name}
-            state={state}
-            location={location}
-            episodesId={episodesId}
-            showCharacterDetailModal={showCharacterDetailModal}
-            setShowCharacterDetailModal={setShowCharacterDetailModal}
+            sprites={sprites}
+            types={types}
+            height={height}
+            weight={weight}
+            stats={stats}
+            showPokemonDetailModal={showPokemonDetailModal}
+            setShowPokemonDetailModal={setShowPokemonDetailModal}
           />
-        </div> */}
+        </div>
       </div>
     </div>
   );
