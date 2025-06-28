@@ -2,12 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { usePokemon } from "@/context/PokemonContext";
 
 export default function Home() {
 
   const router = useRouter();
-  const { fetchPokemons } = usePokemon();
 
   return (
     <div className="bg-black h-screen bg-cover bg-center flex items-center justify-center" style={{ backgroundImage: "url(/images/portal-morty-smith-rick.svg)" }}>
@@ -37,10 +35,7 @@ export default function Home() {
         <div className="flex flex-row gap-5">
           <div>
             <button
-              onClick={async () => {
-                await fetchPokemons();
-                router.push("/table");
-              }}
+              onClick={() => router.push("/table")}
               className="px-5 py-3 bg-[#8BC547] text-[#354E18] font-bold rounded-3xl cursor-pointer"
             >
               TABLA
@@ -48,10 +43,7 @@ export default function Home() {
           </div>
           <div>
             <button
-              onClick={async () => {
-                await fetchPokemons();
-                router.push("/grid");
-              }}
+              onClick={() => router.push("/grid")}
               className="px-5 py-3 bg-[#8BC547] text-[#354E18] font-bold rounded-3xl cursor-pointer"
             >
               CUADRÍCULA

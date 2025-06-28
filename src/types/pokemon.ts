@@ -1,4 +1,5 @@
 export interface Pokemon {
+  types_array: never[];
   id: number;
   name: string;
   sprites: {

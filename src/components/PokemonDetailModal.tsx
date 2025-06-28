@@ -51,14 +51,6 @@ function PokemonDetailModal({ id, name, sprites, types, height, weight, stats, s
                         </p>
                       </div>
                     </div>
-                    {/* <div>
-                      <Image
-                        src={"/icons/ic-ellipsis-v.svg"}
-                        alt={"ic-ellipsis"}
-                        width={40}
-                        height={40}
-                      />
-                    </div> */}
                   </div>
                 </div>
                 <div className="flex flex-row gap-4">
@@ -74,15 +66,17 @@ function PokemonDetailModal({ id, name, sprites, types, height, weight, stats, s
                           </p>
                         </div>
                         <div>
-                          {
+                          {Array.isArray(types) && types.length > 0 ? (
                             types.map((item, id) => (
                               <div key={id}>
                                 <p className="text-[#575B52] font-medium text-base">
-                                  {item.type.name}
+                                  {item.type?.name ?? "Desconocido"}
                                 </p>
                               </div>
                             ))
-                          }
+                          ) : (
+                            <p className="text-[#575B52] font-medium text-base">No disponible</p>
+                          )}
                         </div>
                       </div>
                       <div className="flex flex-col gap-1">
@@ -108,21 +102,6 @@ function PokemonDetailModal({ id, name, sprites, types, height, weight, stats, s
                             {weight}
                           </p>
                         </div>
-                        {/* <div className='bg-[#E7F3D8] w-20 py-1.5 px-2 rounded-4xl flex flex-rows justify-center items-center gap-1'>
-                          <div>
-                            <Image
-                              src="/icons/ic_tick-circle.svg"
-                              alt="ic_tick-circle"
-                              width={16}
-                              height={16}
-                            />
-                          </div>
-                          <div>
-                            <p className='text-[#354E18] font-medium text-sm'>
-                              {state}
-                            </p>
-                          </div>
-                        </div> */}
                       </div>
                     </div>
                   </div>
