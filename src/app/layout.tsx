@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import { PokemonProvider } from "@/context/PokemonContext";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -18,12 +17,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <PokemonProvider>
-      <html lang="en">
-        <body className={`${montserrat.className} antialiased`}>
-          {children}
-        </body>
-      </html>
-    </PokemonProvider>
+    <html lang="en">
+      <body className={`${montserrat.className} antialiased`}>
+        {children}
+      </body>
+    </html>
   );
 }

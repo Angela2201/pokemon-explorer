@@ -31,7 +31,6 @@ function Page() {
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
   const [showPokemonDetailModal, setShowPokemonDetailModal] = useState(false);
 
-
   useEffect(() => {
     fetch(apiData.url)
       .then((res) => res.json())
@@ -219,7 +218,7 @@ function Page() {
           id={selectedPokemon.id}
           name={selectedPokemon.name}
           sprites={selectedPokemon.sprites}
-          types={selectedPokemon.types}
+          types={selectedPokemon.types_array}
           height={selectedPokemon.height}
           weight={selectedPokemon.weight}
           stats={selectedPokemon.stats}

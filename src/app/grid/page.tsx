@@ -34,10 +34,10 @@ function Page() {
             id={item.id}
             name={item.name}
             sprites={item.sprites}
-            types={[]}
+            types={item.types}
             height={item.height}
             weight={item.weight}
-            stats={[]}
+            stats={item.stats}
           />
         ))
       }

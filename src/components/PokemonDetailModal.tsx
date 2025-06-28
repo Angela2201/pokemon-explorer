@@ -66,11 +66,19 @@ function PokemonDetailModal({ id, name, sprites, types, height, weight, stats, s
                           </p>
                         </div>
                         <div>
-                          {Array.isArray(types) && types.length > 0 ? (
+                          {Array.isArray(types) && types.length > 0 && types[0]?.type ? (
                             types.map((item, id) => (
                               <div key={id}>
                                 <p className="text-[#575B52] font-medium text-base">
                                   {item.type?.name ?? "Desconocido"}
+                                </p>
+                              </div>
+                            ))
+                          ) : Array.isArray(types) ? (
+                            types.map((name, id) => (
+                              <div key={id}>
+                                <p className="text-[#575B52] font-medium text-base">
+                                  {name}
                                 </p>
                               </div>
                             ))
