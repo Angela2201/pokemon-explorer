@@ -214,6 +214,7 @@ function Page() {
           </Box>
 
           <DataGrid
+            loading={pokemons.length === 0}
             rows={filteredPokemons}
             columns={columns}
             paginationModel={paginationModel}
