@@ -12,8 +12,7 @@ Este proyecto es una aplicación para explorar información detallalda de cada P
 
 ## Enlace de la aplicación
 
-<!-- TODO: Replace real link -->
-Puedes acceder a la aplicación desplegada en Vercel en el siguiente enlace: [Pokémon Explorer](https://pokemon-explorer-delta-eight.vercel.app)
+Puedes acceder a la aplicación desplegada en Vercel en el siguiente enlace: [Pokémon Explorer](https://pokemon-explorer-delta-eight.vercel.app/)
 
 ## Instalación y uso
 
