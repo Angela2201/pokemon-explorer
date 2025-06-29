@@ -1,137 +1,130 @@
 "use client"
 
-import { Dialog, DialogPanel, Transition } from "@headlessui/react";
+import { Dialog, DialogPanel, Transition, TransitionChild } from "@headlessui/react";
 import { Fragment } from "react";
 import Image from "next/image";
 import { Pokemon } from "@/types/pokemon";
 
 function PokemonDetailModal({ id, name, sprites, types, height, weight, stats, showPokemonDetailModal, setShowPokemonDetailModal }: Pokemon) {
+
+  const statLabels: Record<string, string> = {
+    hp: "Salud Base",
+    attack: "Ataque",
+    defense: "Defensa",
+    "special-attack": "Ataque Especial",
+    "special-defense": "Defensa Especial",
+    speed: "Velocidad"
+  };
+
   return (
     <>
       <Transition appear show={showPokemonDetailModal} as={Fragment}>
         <Dialog as="div" className="relative z-50" onClose={() => setShowPokemonDetailModal(false)}>
-          <div className="fixed inset-0 bg-black/60 bg-opacity-60" />
+          <TransitionChild
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black/60" />
+          </TransitionChild>
 
-          <div className="fixed inset-0 flex items-center justify-center p-4">
-            <DialogPanel className="bg-[#E6E7E3] rounded-lg shadow-xl w-[600px] pb-6 max-h-full overflow-y-auto">
-              <div className="bg-cover bg-top h-32 rounded-t-lg relative" style={{ backgroundImage: "url(/images/banner-modal.jpeg)" }}>
-                <button
-                  onClick={() => setShowPokemonDetailModal(false)}
-                  className="bg-[#FAFAFA] p-3 rounded-full absolute z-10 right-2.5 top-2 cursor-pointer">
-                  <Image
-                    src="/icons/ic-times.svg"
-                    alt="Close"
-                    width={20}
-                    height={20} />
-                </button>
-              </div>
-              <div className="px-6">
-                <div className="flex flex-row items-center gap-6">
-                  <div className="relative z-10 bottom-12">
-                    <Image
-                      src={sprites.front_default}
-                      alt={"character"}
-                      width={128}
-                      height={128}
-                      className="rounded-full border-4 border-[#FAFAFA]"
-                    />
-                  </div>
-                  <div className="w-full flex flex-row justify-between items-center bottom-6">
-                    <div className="flex flex-col items-start relative">
-                      <div className="flex flex-row gap-2 items-center">
-                        <div>
-                          <h3 className="text-[#333630] font-semibold text-lg">
-                            {name}
-                          </h3>
-                        </div>
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4">
+              <TransitionChild
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <DialogPanel className="relative w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <button
+                    className="absolute top-3 right-3 z-10 bg-gray-100 p-2 rounded-full hover:bg-gray-200 cursor-pointer"
+                    onClick={() => setShowPokemonDetailModal(false)}
+                  >
+                    <Image src="/icons/ic-times.svg" alt="Cerrar" width={24} height={24} />
+                  </button>
+
+                  <div className="space-y-6">
+                    <div className="text-center">
+                      <Image
+                        src={sprites.front_default}
+                        alt={name}
+                        width={100}
+                        height={100}
+                        className="mx-auto"
+                      />
+                      <h2 className="text-2xl text-black font-bold">{name}</h2>
+                      <p className="text-gray-500 font-bold">#{id}</p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold mb-2 text-black">Tipos:</h4>
+                      <div className="flex gap-2 justify-center">
+                        {Array.isArray(types) && types.length > 0 && types[0]?.type ? (
+                          types.map((item, id) => (
+                            <div key={id}>
+                              <p className="text-[#575B52] font-medium text-lg">
+                                {item.type?.name ?? "Desconocido"}
+                              </p>
+                            </div>
+                          ))
+                        ) : Array.isArray(types) ? (
+                          types.map((name, id) => (
+                            <div key={id}>
+                              <p className="text-[#575B52] font-medium text-base">
+                                {name}
+                              </p>
+                            </div>
+                          ))
+                        ) : (
+                          <p className="text-[#575B52] font-medium text-base">No disponible</p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="flex justify-around">
+                      <div>
+                        <h4 className="font-semibold text-center text-black">Altura</h4>
+                        <p className="text-center text-lg text-blue-600 font-bold">{height}m</p>
                       </div>
                       <div>
-                        <p className="text-[#575B52] font-medium text-sm">
-                          {id}
-                        </p>
+                        <h4 className="font-semibold text-center text-black">Peso</h4>
+                        <p className="text-center text-lg text-green-600 font-bold">{weight}kg</p>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div className="flex flex-row gap-4">
-                  <div className="w-1/4 bg-[#FAFAFA] p-4 rounded-xl flex flex-col">
-                    <p className="text-[#333630] text-base font-semibold">
-                      Información
-                    </p>
-                    <div className="flex flex-col gap-6 mt-6">
-                      <div className="flex flex-col gap-1">
-                        <div>
-                          <p className="text-[#828282] font-bold text-xs">
-                            Tipo
-                          </p>
-                        </div>
-                        <div>
-                          {Array.isArray(types) && types.length > 0 && types[0]?.type ? (
-                            types.map((item, id) => (
-                              <div key={id}>
-                                <p className="text-[#575B52] font-medium text-base">
-                                  {item.type?.name ?? "Desconocido"}
-                                </p>
-                              </div>
-                            ))
-                          ) : Array.isArray(types) ? (
-                            types.map((name, id) => (
-                              <div key={id}>
-                                <p className="text-[#575B52] font-medium text-base">
-                                  {name}
-                                </p>
-                              </div>
-                            ))
-                          ) : (
-                            <p className="text-[#575B52] font-medium text-base">No disponible</p>
-                          )}
-                        </div>
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <div>
-                          <p className="text-[#828282] font-bold text-xs">
-                            Altura
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-[#575B52] font-medium text-base">
-                            {height}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <div>
-                          <p className="text-[#828282] font-bold text-xs">
-                            Peso
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-[#575B52] font-medium text-base">
-                            {weight}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="w-3/4 bg-[#FAFAFA] p-4 rounded-xl flex flex-col">
+
                     <div>
-                      <p className="text-[#333630] text-base font-semibold">
-                        Estadísticas base
-                      </p>
+                      <h4 className="font-semibold mb-2 text-black">Estadísticas Base:</h4>
+                      <div className="space-y-2">
+                        {stats.map((s, index) => (
+                          <div key={index} className="flex justify-between items-center">
+                            <span className="capitalize font-medium text-black">
+                              {statLabels[s.stat.name] ?? s.stat.name}:
+                            </span>
+                            <div className="flex items-center gap-2">
+                              <div className="w-20 bg-gray-200 rounded-full h-2">
+                                <div
+                                  className="bg-blue-500 h-2 rounded-full transition-all duration-500"
+                                  style={{ width: `${(s.base_stat / 150) * 100}%` }}
+                                ></div>
+                              </div>
+                              <span className="font-bold text-sm w-8 text-black">{s.base_stat}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    {
-                      stats.map((item, id) => (
-                        <div key={id}>
-                          <p className="text-black">
-                            {item.base_stat}
-                          </p>
-                        </div>
-                      ))
-                    }
                   </div>
-                </div>
-              </div>
-            </DialogPanel>
+                </DialogPanel>
+              </TransitionChild>
+            </div>
           </div>
         </Dialog>
       </Transition>

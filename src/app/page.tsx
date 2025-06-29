@@ -1,54 +1,59 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import Image from "next/image";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import TableChartIcon from '@mui/icons-material/TableChart';
+import ViewModuleIcon from '@mui/icons-material/ViewModule';
+import Link from 'next/link';
+
 
 export default function Home() {
 
-  const router = useRouter();
-
   return (
-    <div className="bg-black h-screen bg-cover bg-center flex items-center justify-center" style={{ backgroundImage: "url(/images/portal-morty-smith-rick.svg)" }}>
-      {/* <div className="absolute inset-0 bg-black/60" /> */}
-      <div className="relative z-1 flex flex-col items-center justify-center gap-12 px-72">
-        <div>
-          <Image
-            width={500}
-            height={176}
-            src="/images/wallpaper.jpg"
-            alt="wallpaper"
-            className="flex justify-center items-center"
-          />
+    <div className="min-h-screen bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500">
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center mb-12">
+          <h1 className="text-6xl font-bold text-white mb-4 drop-shadow-lg">Pokédex</h1>
+          <div className='mt-10'>
+            <p className="text-xl text-white/90 mb-8 drop-shadow">Descubre los 151 Pokémon de la primera generación</p>
+          </div>
+          <div className="w-24 h-1 bg-yellow-400 mx-auto rounded-full" />
         </div>
-        <div className="flex flex-col justify-center items-center gap-2.5">
-          <div>
-            <h1 className="text-4xl text-white font-bold">
-              Bienvenido a Pokemon Explorer
-            </h1>
-          </div>
-          <div>
-            <h3 className="text-white text-lg font-semibold text-center">
-              En esta aplicación podrás encontrar los diferentes Pokemones de la primera generación.
-            </h3>
-          </div>
-        </div>
-        <div className="flex flex-row gap-5">
-          <div>
-            <button
-              onClick={() => router.push("/table")}
-              className="px-5 py-3 bg-[#8BC547] text-[#354E18] font-bold rounded-3xl cursor-pointer"
-            >
-              TABLA
-            </button>
-          </div>
-          <div>
-            <button
-              onClick={() => router.push("/grid")}
-              className="px-5 py-3 bg-[#8BC547] text-[#354E18] font-bold rounded-3xl cursor-pointer"
-            >
-              CUADRÍCULA
-            </button>
-          </div>
+
+        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+          <Card className="group hover:scale-105 transition-all duration-300 shadow-2xl border-0 bg-white/95 backdrop-blur">
+            <CardContent className="p-8 text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform duration-300">
+                <TableChartIcon className="w-12 h-12 text-white" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">Vista de Tabla</h2>
+              <p className="text-gray-600 mb-6">
+                Explora todos los Pokémon en una tabla detallada
+              </p>
+              <Link href="/table">
+                <button className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-md cursor-pointer">
+                  Ver Tabla
+                </button>
+              </Link>
+            </CardContent>
+          </Card>
+
+          <Card className="group hover:scale-105 transition-all duration-300 shadow-2xl border-0 bg-white/95 backdrop-blur">
+            <CardContent className="p-8 text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform duration-300">
+                <ViewModuleIcon className="w-12 h-12 text-white" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">Vista de Cuadrícula</h2>
+              <p className="text-gray-600 mb-6">
+                Navega por los Pokémon en tarjetas visuales con información detallada
+              </p>
+              <Link href="/grid">
+                <button className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-md cursor-pointer">
+                  Ver Cuadrícula
+                </button>
+              </Link>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

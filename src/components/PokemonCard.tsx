@@ -10,45 +10,36 @@ function PokemonCard({ id, name, sprites, types, height, weight, stats }: Pokemo
   const [showPokemonDetailModal, setShowPokemonDetailModal] = useState(false);
 
   return (
-    <div className='flex flex-row w-full cursor-pointer' onClick={() => setShowPokemonDetailModal(true)}>
-      <div className='h-full relative'>
-        <div className=''>
+    <div className="group cursor-pointer hover:scale-105 transition-all duration-300 hover:shadow-xl border-2 hover:border-blue-300 rounded-lg" onClick={() => setShowPokemonDetailModal(true)}>
+      <div className="p-4 relative">
+        <div className="absolute top-2 right-2 bg-gray-800 text-white text-xs font-bold px-2 py-1 rounded-full">
+          {id}
+        </div>
+        <div className="flex justify-center mb-4 mt-2">
           <Image
             src={sprites.front_default}
             alt="pokemon"
-            width={140}
-            height={137}
-            className='w-full h-full'
+            width={100}
+            height={100}
+          // className='w-full h-full'
           />
         </div>
+        <h3 className="text-center font-bold text-lg text-gray-800 group-hover:text-blue-600 transition-colors">
+          {name}
+        </h3>
       </div>
-      <div className='flex flex-col pt-3 px-4 pb-4 bg-white rounded-r-2xl w-full'>
-        <div className='flex flex-row justify-between'>
-          <div>
-            <h3 className='text-[#333630] font-semibold text-lg'>
-              {name}
-            </h3>
-          </div>
-        </div>
-        <div>
-          <p className='text-[#575B52] font-medium text-sm'>
-            {id}
-          </p>
-        </div>
-        <div>
-          <PokemonDetailModal
-            id={id}
-            name={name}
-            sprites={sprites}
-            types={types}
-            height={height}
-            weight={weight}
-            stats={stats}
-            showPokemonDetailModal={showPokemonDetailModal}
-            setShowPokemonDetailModal={setShowPokemonDetailModal}
-          />
-        </div>
-      </div>
+
+      <PokemonDetailModal
+        id={id}
+        name={name}
+        sprites={sprites}
+        types={types}
+        height={height}
+        weight={weight}
+        stats={stats}
+        showPokemonDetailModal={showPokemonDetailModal}
+        setShowPokemonDetailModal={setShowPokemonDetailModal}
+      />
     </div>
   );
 }

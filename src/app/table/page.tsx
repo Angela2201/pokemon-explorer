@@ -5,6 +5,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Image from "next/image";
+import Link from 'next/link';
 import { Pokemon } from '@/types/pokemon';
 import {
   FormControl,
@@ -14,6 +15,7 @@ import {
   Checkbox,
   ListItemText
 } from '@mui/material';
+import WestIcon from '@mui/icons-material/West';
 import PokemonDetailModal from '@/components/PokemonDetailModal';
 
 function Page() {
@@ -87,8 +89,8 @@ function Page() {
       width: 100,
       renderCell: (params) => (
         <Image
-          width={40}
-          height={40}
+          width={60}
+          height={60}
           src={params.row.sprites.front_default}
           alt={params.row.name}
           className="flex justify-center items-center"
@@ -100,58 +102,58 @@ function Page() {
     {
       field: 'name',
       headerName: 'Nombre',
-      width: 150
+      width: 125
     },
     {
       field: 'types',
       headerName: 'Tipo(s)',
-      width: 150,
+      width: 120,
       sortComparator: (a, b) => a.localeCompare(b),
     },
     {
       field: 'weight',
       headerName: 'Peso(Kg)',
-      width: 100
+      width: 80
     },
     {
       field: 'height',
       headerName: 'Altura (m)',
-      width: 100
+      width: 80
     },
     {
       field: 'base_health',
       headerName: 'Salud base',
-      width: 100
+      width: 90
     },
     {
       field: 'base_experience',
       headerName: 'Experiencia base',
-      width: 100
+      width: 125
     },
     {
       field: 'base_attack',
       headerName: 'Ataque base',
-      width: 120,
+      width: 100,
     },
     {
       field: 'base_defense',
       headerName: 'Defensa base',
-      width: 100
+      width: 110
     },
     {
       field: 'special_attack',
       headerName: 'Ataque especial',
-      width: 100
+      width: 125
     },
     {
       field: 'special_defense',
       headerName: 'Defensa especial',
-      width: 100
+      width: 130
     },
     {
       field: 'speed',
       headerName: 'Velocidad',
-      width: 100
+      width: 80
     },
     {
       field: 'see-details',
@@ -176,57 +178,70 @@ function Page() {
 
 
   return (
-    <Box sx={{ height: 600, width: '100%', padding: 4, bgcolor: 'white' }}>
 
-      <Box display="flex" alignItems="center" gap={2} mb={2}>
-        <FormControl sx={{ minWidth: 300 }}>
-          <InputLabel id="type-filter-label">Filtrar por tipo</InputLabel>
-          <Select
-            labelId="type-filter-label"
-            multiple
-            value={selectedTypes}
-            onChange={(e) => setSelectedTypes(e.target.value as string[])}
-            renderValue={(selected) => selected.join(", ")}
-            label="Filtrar por tipo"
-          >
-            {allTypes.map((type) => (
-              <MenuItem key={type} value={type}>
-                <Checkbox checked={selectedTypes.includes(type)} />
-                <ListItemText primary={type} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+    <div className="min-h-screen bg-gray-50">
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <Link href="/" className='flex flex-row gap-1 md:gap-3 items-center text-xs md:text-lg font-bold text-gray-800 border border-gray-500/35 p-2 rounded-lg'>
+              <WestIcon className='w-2 h-2' />
+              Volver
+            </Link>
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Vista de Tabla</h1>
+          </div>
+        </div>
+        <Box sx={{ height: 600, width: '100%', paddingY: 4 }}>
+          <Box display="flex" alignItems="center" gap={2} mb={2}>
+            <FormControl sx={{ minWidth: 300 }}>
+              <InputLabel id="type-filter-label">Filtrar por tipo</InputLabel>
+              <Select
+                labelId="type-filter-label"
+                multiple
+                value={selectedTypes}
+                onChange={(e) => setSelectedTypes(e.target.value as string[])}
+                renderValue={(selected) => selected.join(", ")}
+                label="Filtrar por tipo"
+              >
+                {allTypes.map((type) => (
+                  <MenuItem key={type} value={type}>
+                    <Checkbox checked={selectedTypes.includes(type)} />
+                    <ListItemText primary={type} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
 
-        <Button variant="outlined" onClick={() => setSelectedTypes([])}>
-          Limpiar filtro
-        </Button>
-      </Box>
+            <Button variant="outlined" onClick={() => setSelectedTypes([])}>
+              Limpiar filtro
+            </Button>
+          </Box>
 
-      <DataGrid
-        rows={filteredPokemons}
-        columns={columns}
-        paginationModel={paginationModel}
-        onPaginationModelChange={setPaginationModel}
-        pageSizeOptions={[10, 20, 30, 40, 50]}
-        pagination
-        getRowId={(row) => row.id}
-      />
+          <DataGrid
+            rows={filteredPokemons}
+            columns={columns}
+            paginationModel={paginationModel}
+            onPaginationModelChange={setPaginationModel}
+            pageSizeOptions={[10, 20, 30, 40, 50]}
+            pagination
+            getRowId={(row) => row.id}
+          />
 
-      {selectedPokemon && (
-        <PokemonDetailModal
-          id={selectedPokemon.id}
-          name={selectedPokemon.name}
-          sprites={selectedPokemon.sprites}
-          types={selectedPokemon.types_array}
-          height={selectedPokemon.height}
-          weight={selectedPokemon.weight}
-          stats={selectedPokemon.stats}
-          showPokemonDetailModal={showPokemonDetailModal}
-          setShowPokemonDetailModal={setShowPokemonDetailModal} types_array={[]}
-        />
-      )}
-    </Box>
+          {selectedPokemon && (
+            <PokemonDetailModal
+              id={selectedPokemon.id}
+              name={selectedPokemon.name}
+              sprites={selectedPokemon.sprites}
+              types={selectedPokemon.types_array}
+              height={selectedPokemon.height}
+              weight={selectedPokemon.weight}
+              stats={selectedPokemon.stats}
+              showPokemonDetailModal={showPokemonDetailModal}
+              setShowPokemonDetailModal={setShowPokemonDetailModal} types_array={[]}
+            />
+          )}
+        </Box>
+      </div>
+    </div>
   );
 }
 
