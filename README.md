@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pokemón Explorer
 
-## Getting Started
+Este proyecto es una aplicación para explorar información detallalda de cada Pokémon utilizando la API pública de PokéAPI.
 
-First, run the development server:
+## Características
+
+- Visualiación de los datos por medio de una tabla y de una cuadrícula.
+- En la vista de la Tabla se puede filtrar por tipo(s) de Pokémon, ordenar los diferentes campos y paginar.
+- En la vista de la Cuadrícula se puede visualizar los datos de los Pokémones de forma más visual y atractiva.
+- Visualización de detalles como tipo, habilidades y estadísticas por medio de un modal.
+- Interfaz intuitiva y responsiva.
+
+## Enlace de la aplicación
+
+<!-- TODO: Replace real link -->
+Puedes acceder a la aplicación desplegada en Vercel en el siguiente enlace: [Pokémon Explorer](https://pokemon-explorer-delta-eight.vercel.app)
+
+## Instalación y uso
+
+### 1. Clona el repositorio
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone git@github.com:Angela2201/pokemon-explorer.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Accede al directorio del proyecto
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cd pokemon-explorer
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Instala las dependencias
 
-## Learn More
+```bash
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Compila la aplicación
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 5. Ejecuta servidor de la aplicación
 
-## Deploy on Vercel
+```bash
+npm run start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Abre [http://localhost:3000](http://localhost:3000) para ver la aplicación en tu navegador.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Tecnologías utilizadas
+
+- **TypeScript:** Lenguaje de programación fuertemente tipado que mejora la calidad y mantenibilidad del código.
+- **Next.js:** Framework de React para el desarrollo de aplicaciones web optimizadas.
+- **React:** Framework de JavaScript para construir interfaces de usuario interactivas y reutilizables.
+- **Tailwind CSS:** Framework de CSS para el diseño, permitiendo una personalización rápida y eficiente.
+- **headlessui/react:** Para la gestión de los modales.
+- **mui/x-data-grid:** Para la implementación de la tabla.
+
+## Imágenes de la aplicación
+
+### Pantalla de inicio
+
+![Pantalla de inicio](screenshots/screenshot-home.png)
+
+### Pantalla de la vista de la Tabla
+
+![Pantalla de Tabla](screenshots/screenshot-table.png)
+
+### Pantalla de la vista de la Cuadrícula
+
+![Pantalla de Cuadrícula](screenshots/screenshot-grid.png)
+
+### Vista del modal con los detalles del Pokémon
+
+<img src="screenshots/screenshot-modal.png" alt="vista-modal" style="width:50%;" />  <!-- markdownlint-disable MD033 -->
