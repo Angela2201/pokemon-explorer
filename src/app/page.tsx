@@ -20,7 +20,7 @@ export default function Home() {
           <div className="w-24 h-1 bg-yellow-400 mx-auto rounded-full" />
         </div>
 
-        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+        <div className="max-w-xl lg:max-w-4xl mx-auto grid lg:grid-cols-2 gap-8">
           <Card className="group hover:scale-105 transition-all duration-300 shadow-2xl border-0 bg-white/95 backdrop-blur">
             <CardContent className="p-8 text-center">
               <div className="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform duration-300">
