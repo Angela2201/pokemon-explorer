@@ -4,6 +4,7 @@ import { Dialog, DialogPanel, Transition, TransitionChild } from "@headlessui/re
 import { Fragment } from "react";
 import Image from "next/image";
 import { Pokemon } from "@/types/pokemon";
+import CloseIcon from '@mui/icons-material/Close';
 
 function PokemonDetailModal({ id, name, sprites, types, height, weight, stats, showPokemonDetailModal, setShowPokemonDetailModal }: Pokemon) {
 
@@ -48,7 +49,7 @@ function PokemonDetailModal({ id, name, sprites, types, height, weight, stats, s
                     className="absolute top-3 right-3 z-10 bg-gray-100 p-2 rounded-full hover:bg-gray-200 cursor-pointer"
                     onClick={() => setShowPokemonDetailModal(false)}
                   >
-                    <Image src="/icons/ic-times.svg" alt="Cerrar" width={24} height={24} />
+                    <CloseIcon className="w-6 h-6 text-black" />
                   </button>
 
                   <div className="space-y-6">
@@ -76,10 +77,10 @@ function PokemonDetailModal({ id, name, sprites, types, height, weight, stats, s
                             </div>
                           ))
                         ) : Array.isArray(types) ? (
-                          types.map((name, id) => (
+                          types.map((typeName, id) => (
                             <div key={id}>
                               <p className="text-[#575B52] font-medium text-base">
-                                {name}
+                                {typeof typeName === "string" ? typeName : JSON.stringify(typeName)}
                               </p>
                             </div>
                           ))

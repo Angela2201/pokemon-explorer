@@ -5,7 +5,7 @@ import PokemonDetailModal from './PokemonDetailModal';
 import { Pokemon } from "@/types/pokemon";
 import { useState } from 'react';
 
-function PokemonCard({ id, name, sprites, types, height, weight, stats }: Pokemon) {
+function PokemonCard({ id, name, sprites, types, height, weight, stats, base_experience }: Pokemon) {
 
   const [showPokemonDetailModal, setShowPokemonDetailModal] = useState(false);
 
@@ -21,7 +21,6 @@ function PokemonCard({ id, name, sprites, types, height, weight, stats }: Pokemo
             alt="pokemon"
             width={100}
             height={100}
-          // className='w-full h-full'
           />
         </div>
         <h3 className="text-center font-bold text-lg text-gray-800 group-hover:text-blue-600 transition-colors">
@@ -37,6 +36,7 @@ function PokemonCard({ id, name, sprites, types, height, weight, stats }: Pokemo
         height={height}
         weight={weight}
         stats={stats}
+        base_experience={base_experience}
         showPokemonDetailModal={showPokemonDetailModal}
         setShowPokemonDetailModal={setShowPokemonDetailModal}
       />

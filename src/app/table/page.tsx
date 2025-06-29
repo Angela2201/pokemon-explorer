@@ -1,6 +1,5 @@
 "use client";
 
-// import { usePokemon } from "@/context/PokemonContext";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
 import { useEffect, useState } from 'react';
@@ -20,7 +19,7 @@ import PokemonDetailModal from '@/components/PokemonDetailModal';
 
 function Page() {
 
-  const [apiData, setApiData] = useState({
+  const [apiData] = useState({
     url: "https://pokeapi.co/api/v2/pokemon?offset=151&limit=151"
   });
 
@@ -41,14 +40,14 @@ function Page() {
 
         Promise.all(urls.map((url: string) => fetch(url).then(res => res.json())))
           .then((detailedPokemons) => {
-            const enrichedPokemons = detailedPokemons.map((pokemon: any) => {
+            const enrichedPokemons = detailedPokemons.map((pokemon: Pokemon) => {
               const statsMap = Object.fromEntries(
-                pokemon.stats.map((s: any) => [s.stat.name, s.base_stat])
+                pokemon.stats.map((s: { stat: { name: string }, base_stat: number }) => [s.stat.name, s.base_stat])
               );
 
               const type1 = pokemon.types?.[0]?.type.name ?? "";
               const type2 = pokemon.types?.[1]?.type.name ?? "";
-              const types = type2 ? `${type1} / ${type2}` : type1;
+              const types_display = type2 ? `${type1} / ${type2}` : type1;
 
               return {
                 ...pokemon,
@@ -60,7 +59,7 @@ function Page() {
                 speed: statsMap['speed'] ?? '',
                 type1,
                 type2,
-                types,
+                types_display,
                 types_array: [type1, type2].filter(Boolean),
               };
             });
@@ -105,7 +104,7 @@ function Page() {
       width: 125
     },
     {
-      field: 'types',
+      field: 'types_display',
       headerName: 'Tipo(s)',
       width: 120,
       sortComparator: (a, b) => a.localeCompare(b),
@@ -229,12 +228,14 @@ function Page() {
               id={selectedPokemon.id}
               name={selectedPokemon.name}
               sprites={selectedPokemon.sprites}
-              types={selectedPokemon.types_array}
+              types={selectedPokemon.types}
               height={selectedPokemon.height}
               weight={selectedPokemon.weight}
               stats={selectedPokemon.stats}
+              base_experience={selectedPokemon.base_experience}
               showPokemonDetailModal={showPokemonDetailModal}
-              setShowPokemonDetailModal={setShowPokemonDetailModal} types_array={[]}
+              setShowPokemonDetailModal={setShowPokemonDetailModal}
+              types_array={[]}
             />
           )}
         </Box>

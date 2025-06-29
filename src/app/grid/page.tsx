@@ -2,12 +2,13 @@
 
 import PokemonCard from "@/components/PokemonCard";
 import { useState, useEffect } from "react";
+import { Pokemon } from '@/types/pokemon';
 import Link from 'next/link';
 import WestIcon from '@mui/icons-material/West';
 
 function Page() {
 
-  const [apiData, setApiData] = useState({
+  const [apiData] = useState({
     url: "https://pokeapi.co/api/v2/pokemon?offset=151&limit=151"
   })
 
@@ -52,6 +53,10 @@ function Page() {
                 height={item.height}
                 weight={item.weight}
                 stats={item.stats}
+                base_experience={item.base_experience}
+                types_array={item.types_array ?? []}
+                showPokemonDetailModal={item.showPokemonDetailModal ?? false}
+                setShowPokemonDetailModal={item.setShowPokemonDetailModal ?? (() => {})}
               />
             ))
           }
